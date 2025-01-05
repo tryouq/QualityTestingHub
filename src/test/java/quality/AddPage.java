@@ -30,7 +30,7 @@ public class AddPage {
 
     public void deleteText(){
         $(By.className("deletebtn")).click();
-        sleep(2000);
+        //sleep(2000);
     }
 
     public boolean getClearText(){

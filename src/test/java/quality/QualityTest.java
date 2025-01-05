@@ -10,10 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static com.codeborne.selenide.Selenide.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 //@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class QualityTest extends BaseTest{
@@ -35,8 +33,9 @@ public class QualityTest extends BaseTest{
         assertEquals(desPage.clickFigureCircle(), "display: none;");
         assertEquals(desPage.clickFigureRounded(), "display: none;");
         assertEquals(desPage.clickFigureSquare(), "display: none;");
+
+        //Выход на основую станицу и проверка что перешли
         $x("//*[@id=\"menu-item-132\"]/a").click();
-        //Проверка что вернулись на home по ссылке
         assertEquals(WebDriverRunner.url(), Base_url);
     }
 
@@ -61,6 +60,36 @@ public class QualityTest extends BaseTest{
         //Проверяем по тексту что его нет на странице
         assertFalse(addPage.getClearText());
 
+        //Выход на основую станицу и проверка что перешли
+        $x("//*[@id=\"menu-item-132\"]/a").click();
+        assertEquals(WebDriverRunner.url(), Base_url);
+    }
+
+    //В дальнейшем под rest assure
+    //Test
+    //public void test3_brokenImages(){}
+
+    private final static String currentJQueryPage= "https://automationpractice.qualitytestinghub.com/jquery-ui-menu/";
+    @Test
+    public void test4_jqueryUI(){
+        JQueryUIpage jqueryPage = new JQueryUIpage();
+
+        jqueryPage.openWebSite(Base_url);
+        jqueryPage.clickJqueryPage();
+        assertEquals(WebDriverRunner.url(), currentJQueryPage);
+
+        //Проверка что в эллементах выпадаещего меню ушел display none
+        assertFalse(jqueryPage.clickMusicButton().contains("display: none;"));
+        assertFalse(jqueryPage.clickRockButton().contains("display: none;"));
+
+        //Проверить что в выпадающем меню мы нашли кнопку альтернатива
+        String nameAlternativeButton = "Alternative";
+        assertEquals(jqueryPage.clickAlternativeBanner(), nameAlternativeButton);
+
+        //Проверка что в выпадающем меню появился display none
+        assertTrue(jqueryPage.bannersIsClose().contains("display: none;"));
+
+        //Выход на основую станицу и проверка что перешли
         $x("//*[@id=\"menu-item-132\"]/a").click();
         assertEquals(WebDriverRunner.url(), Base_url);
     }
