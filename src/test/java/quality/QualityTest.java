@@ -93,4 +93,47 @@ public class QualityTest extends BaseTest{
         $x("//*[@id=\"menu-item-132\"]/a").click();
         assertEquals(WebDriverRunner.url(), Base_url);
     }
+
+    private final static String inputPageUrl = "https://automationpractice.qualitytestinghub.com/inputs/";
+    @Test
+    void test5_inputPage(){
+        InputPage inputPage = new InputPage();
+
+        inputPage.openWebSite(Base_url);
+        inputPage.clickInputPage();
+        assertEquals(WebDriverRunner.url(), inputPageUrl);
+
+        //Проверка что текст MaximClose, клосе потому что, не забирало чисто текст с первого дива, также с кнопки берет
+        assertEquals("Maxim", inputPage.inputTextWithAdd());
+        inputPage.deleteText();
+
+        //Проверили что текста нет, так как не получится проверить по style=hidden, ТУТ ТОКО ТАК!
+        assertEquals("", inputPage.getDeleteText());
+
+        //Выход на основую станицу и проверка что перешли
+        $x("//*[@id=\"menu-item-132\"]/a").click();
+        assertEquals(WebDriverRunner.url(), Base_url);
+    }
+
+    //В дальнейшем под rest assure
+    //Test
+    //public void test6_DragAndDrop(){}
+
+    private final static String dropDownUrl = "https://automationpractice.qualitytestinghub.com/dropdown-list/";
+    @Test
+    void test7_DropDownList(){
+        DropDownPage dropDown = new DropDownPage();
+        dropDown.openWebSite(Base_url);
+        dropDown.clickPage();
+        assertEquals(WebDriverRunner.url(), dropDownUrl);
+
+        dropDown.useFromDropDown();
+
+        //Проверка что дроп даун меню работает и можно сделать выбор из выпадающего меню
+        assertTrue(dropDown.useValue("FunctionTesting"));
+
+        //Выход на основую станицу и проверка что перешли
+        $x("//*[@id=\"menu-item-132\"]/a").click();
+        assertEquals(WebDriverRunner.url(), Base_url);
+    }
 }
