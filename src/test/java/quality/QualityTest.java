@@ -1,5 +1,6 @@
 package quality;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import org.junit.Assert;
@@ -85,7 +86,6 @@ public class QualityTest extends BaseTest{
         //Проверить что в выпадающем меню мы нашли кнопку альтернатива
         String nameAlternativeButton = "Alternative";
         assertEquals(jqueryPage.clickAlternativeBanner(), nameAlternativeButton);
-
         //Проверка что в выпадающем меню появился display none
         assertTrue(jqueryPage.bannersIsClose().contains("display: none;"));
 
@@ -131,6 +131,32 @@ public class QualityTest extends BaseTest{
 
         //Проверка что дроп даун меню работает и можно сделать выбор из выпадающего меню
         assertTrue(dropDown.useValue("FunctionTesting"));
+
+        //Выход на основую станицу и проверка что перешли
+        $x("//*[@id=\"menu-item-132\"]/a").click();
+        assertEquals(WebDriverRunner.url(), Base_url);
+    }
+
+    private final String checkboxesUrl = "https://automationpractice.qualitytestinghub.com/checkboxes/";
+    @Test
+    void test8_CheckBoxes(){
+        CheckBoxes checkBoxes = new CheckBoxes();
+        checkBoxes.openWebSite(Base_url);
+        checkBoxes.clickPage();
+
+        assertEquals(checkboxesUrl, WebDriverRunner.url());
+
+        checkBoxes.clickBlackBox();
+        checkBoxes.clickGreyBox();
+
+        assertTrue(checkBoxes.checkBoxBlackBox());
+        assertTrue(checkBoxes.checkBoxGreyBox());
+
+        checkBoxes.clickBlackBox();
+        checkBoxes.clickGreyBox();
+
+        assertFalse(checkBoxes.checkBoxBlackBox());
+        assertFalse(checkBoxes.checkBoxGreyBox());
 
         //Выход на основую станицу и проверка что перешли
         $x("//*[@id=\"menu-item-132\"]/a").click();
