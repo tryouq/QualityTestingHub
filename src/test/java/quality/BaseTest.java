@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 public class BaseTest {
     public void set() {
         Configuration.browserSize = "1920x1080";
-        Configuration.headless = false;
+        Configuration.headless = true;
     }
 
     public void openWebSite(String url){

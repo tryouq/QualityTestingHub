@@ -22,7 +22,7 @@ public class QualityTest extends BaseTest{
 
 
     @Test
-    @Order(1)
+    @Order(3)
     public void test1_checkDes(){
         DesappearingPage desPage = new DesappearingPage();
         set();
@@ -75,7 +75,7 @@ public class QualityTest extends BaseTest{
 
     private final static String currentJQueryPage= "https://automationpractice.qualitytestinghub.com/jquery-ui-menu/";
     @Test
-    @Order(3)
+    @Order(1)
     public void test4_jqueryUI(){
         JQueryUIpage jqueryPage = new JQueryUIpage();
 
